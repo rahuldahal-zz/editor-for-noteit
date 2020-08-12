@@ -1,4 +1,5 @@
 const path = require("path");
+const currentTask = process.env.npm_lifecycle_event;
 
 let cssConfig = {
   test: /\.(sa|sc|c)ss$/i,
@@ -11,9 +12,15 @@ module.exports = {
     filename: "bundled.js",
     path: path.resolve(__dirname, "src"),
   },
-  mode: "development",
-  watch: true,
   module: {
     rules: [cssConfig],
   },
 };
+
+if (currentTask === "dev") {
+  module.exports.watch = true;
+  module.exports.mode = "development";
+} else {
+  module.exports.watch = false;
+  module.exports.mode = "production";
+}

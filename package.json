@@ -4,7 +4,8 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "dev": "webpack"
+    "dev": "webpack",
+    "build": "webpack"
   },
   "keywords": [],
   "author": "",
