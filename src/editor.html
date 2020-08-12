@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>EditorJS</title>
+</head>
+
+<body id="editorScreen">
+
+	<nav>
+		<button id="seeOutputBtn">See Output(Ctrl+S)</button>
+		<form id="submitNote" action="#" method="post">
+			<input type="hidden" name="token" id="token" value="">
+			<button id="submitBtn">Submit</button>
+		</form>
+	</nav>
+
+	<div id="container">
+		<div id="editor-output-wrap">
+			<div id="editorjsWrap">
+				<div id="editorjs" data-simplebar data-simplebar-auto-hide="false"></div>
+			</div>
+			<!-- for some reasons, the "simple scrollbar only works when there is only one children element" -->
+			<div id="outputWrap" data-simplebar data-simplebar-auto-hide="false">
+				<div id="output"></div>
+			</div>
+		</div>
+	</div>
+
+	<script src="./bundled.js"></script>
+
+</body>
+
+</html>

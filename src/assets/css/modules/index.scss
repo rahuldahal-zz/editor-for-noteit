@@ -1,0 +1,68 @@
+body {
+  overflow: hidden;
+}
+
+#backgroundImage {
+  position: absolute;
+  top: -2.5vh;
+  left: -5vw;
+  height: 105vh;
+  width: 110vw;
+  background: radial-gradient(
+      circle,
+      rgba(17, 17, 17, 0.4) 0%,
+      rgba(22, 22, 22, 0.3) 100%
+    ),
+    url("assets/images/indexBackground.jpg");
+  background-size: cover;
+}
+
+#content {
+  position: absolute;
+  top: 50%;
+  left: 10vw;
+  transform: translateY(-50%);
+  height: 40vh;
+
+  h1 {
+  font-family: "Proza Libre", var(--headingFont);
+    font-size: 3.5rem;
+    color: #f4f4f4;
+    margin-bottom: 5vh;
+  }
+
+  p {
+    color: #eee;
+    margin-bottom: 3vh;
+  }
+}
+
+#indexNav {
+  position: relative;
+  z-index: 2;
+  background-image: linear-gradient(
+    rgba(255, 255, 255, 0.4),
+    #f4f4f4
+  ) !important;
+
+  div {
+    width: 1200px;
+    padding: 0.5rem 0;
+    margin: auto;
+    text-align: right;
+
+    a,
+    .fbBtn {
+      text-decoration: none;
+      color: #333;
+      margin-left: 10px;
+    }
+
+    #login {
+      background-color: #333;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+    }
+  }
+}
