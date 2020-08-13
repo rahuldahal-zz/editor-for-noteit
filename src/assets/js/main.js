@@ -1,3 +1,4 @@
+import FBLogin from "./modules/facebookLogin";
 import ExternalResources from "./modules/externalResourcesHandler";
 import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
@@ -21,6 +22,17 @@ import "../css/style.scss";
 
 import "simplebar"; // or "import SimpleBar from 'simplebar';" if you want to use it manually.
 import "simplebar/dist/simplebar.css";
+
+// facebook login starts
+const loginBtn = document.getElementById("loginBtn");
+
+if (loginBtn) {
+  loginBtn.addEventListener("click", () => {
+    console.log("login button is clicked");
+    new FBLogin(FB.login); // passing the login() into the constructor
+  });
+}
+// facebook login ends
 
 // Press "tab" to edit...
 
@@ -87,4 +99,4 @@ if (document.getElementById("editorjs")) {
 
 // external resources
 
-new ExternalResources();
+// new ExternalResources();
