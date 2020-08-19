@@ -1,0 +1,4 @@
+/editor / 200
+/editor.html / 200
+/createContributor /.netlify/functions/createContributor/createContributor.js 200
+/submitNote /.netlify/functions/submitNote/submitNote.js 200
