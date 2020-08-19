@@ -1,6 +1,10 @@
+import EditorSetup from "./editorjs/editorSetup";
+
 export default class FBLogin {
-  constructor(loginMethod) {
-    loginMethod((response) => this.statusChangeCallback(response));
+  constructor(loginFunctionProvidedByFB) {
+    loginFunctionProvidedByFB((response) =>
+      this.statusChangeCallback(response)
+    );
   }
 
   // events
@@ -10,28 +14,30 @@ export default class FBLogin {
 
   statusChangeCallback(response) {
     if (response.status === "connected") {
+      let statusFromNoteIT;
       this.testAPI()
         .then((response) => {
-          console.log(JSON.stringify(response));
-          fetch("https://mynoteit.herokuapp.com/api/contributors/create", {
+          // use this API via the lambda function
+          fetch("/createContributor", {
             method: "post",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-            },
 
             //make sure to serialize your JSON body
             body: JSON.stringify(response),
           })
             .then((res) => {
-              console.log(res);
-              if (res.okay) {
+              statusFromNoteIT = res.status;
+              if (res.ok) {
                 return res.json();
               } else {
                 throw new Error(`The server responded with ${res.status}`);
               }
             })
-            .then((data) => this.handleAuthentication(true, data))
+            .then((data) =>
+              this.handleAuthentication(true, {
+                status: statusFromNoteIT,
+                data: data,
+              })
+            )
             .catch((error) => console.error(error));
         })
         .catch((error) => console.error(error));
@@ -45,10 +51,22 @@ export default class FBLogin {
     });
   }
 
-  handleAuthentication(isLoggedIn, data) {
-    if (isLoggedIn) {
-      console.log("Authenticated. Now, use [data] to proceed to /editor page");
-    } else console.log("You are not authenticated");
+  handleAuthentication(isLoggedIn, { status, data }) {
+    if (!isLoggedIn) {
+      return console.log("You are not authenticated");
+    }
+
+    console.log(status, data);
+    if (status === 202) {
+      console.log(data); // already exists and is approved
+      new EditorSetup(data.success);
+    } else if (status === 201) {
+      console.log(data); // Created but not approved yet.
+    } else if (status === 200) {
+      console.log(data); // already exists but not approved.
+    } else {
+      throw new Error("bogus status code is received!!");
+    }
   }
 
   testAPI() {

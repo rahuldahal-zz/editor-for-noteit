@@ -1,5 +1,3 @@
-
-
 .m5 {
   margin: 5px;
 }
@@ -100,8 +98,27 @@
   list-style: none;
 }
 
+button:hover,
+button:focus {
+  transform: translateY(0) scaleX(1.05);
+}
+button:active {
+  transform: translateY(0) scale(0.9);
+}
 
+#fade {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 3;
+  background-color: rgba(0, 0, 0, 0.6);
+}
 
+.visible {
+  visibility: visible !important;
+}
 
-// notes 
-
+// notes

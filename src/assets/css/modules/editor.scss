@@ -26,6 +26,12 @@
     filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.4));
   }
 
+  .codex-editor {
+    position: absolute;
+    top: 1rem;
+    width: 90%;
+  }
+
   #editor-output-wrap {
     margin: auto;
     position: relative;
@@ -35,12 +41,13 @@
     justify-content: space-between;
   }
 
-  #editorjs,
+  #editorjsWrap,
   #outputWrap {
     width: 45vw;
     height: 80vh;
     padding: 1rem;
     background-color: #f4f4f4;
+    border-top-right-radius: 1rem;
     filter: drop-shadow(0 -6px 12px rgba(0, 0, 0, 0.2));
   }
 
@@ -52,7 +59,6 @@
     bottom: 100%;
     z-index: 4;
     width: max-content;
-    font-family: "open sans", var(--bodyFont);
     padding: 0.5rem 1rem;
     background-color: var(--primaryTextColor);
     color: #eee;
@@ -69,11 +75,14 @@
     content: "And this is how it will look on the App...";
   }
 
-  #outputWrap {
+  #outputWrap,
+  #editorjsWrap {
+    width: 45vw;
     height: 80vh;
   }
 
-  #output {
+  #output,
+  #editorjs {
     height: 100%;
     min-height: 80vh;
     padding-top: 0;
@@ -112,10 +121,6 @@
     width: 100%;
   }
 
-  h3 {
-    letter-spacing: -1px;
-  }
-
   .ml1rem {
     margin-left: 1rem;
     display: block;
@@ -128,13 +133,12 @@
 
   #output {
     background-color: #f4f4f4;
-
-    h2 {
-      background-color: var(--accentColor);
-    }
-
     p + p {
       margin-top: 0.5rem;
     }
+  }
+
+  .simplebar-vertical {
+    top: 0.5rem;
   }
 }

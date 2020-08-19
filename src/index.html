@@ -9,24 +9,22 @@
 
 <body>
 
-    <nav id="indexNav">
-        <div id="links">
-            <a href="about">About</a>
-
-            <!-- <fb:login-button id="fbBtn" scope="" onlogin="checkLoginState();">
-            </fb:login-button> -->
-
-            <button id="loginBtn">Login</button>
+    <main id="indexScreen">
+        <nav id="indexNav">
+            <div id="links">
+                <a href="about" class="btn">About</a>
+                <button id="loginBtn">Login</button>
+            </div>
+        </nav>
+        <div id="content">
+            <h1>Hey, welcome to the <br /> Editor for NoteIT</h1>
+            <p>Before you begin, check this video out.</p>
+            <button type="button">Watch Video <i class="fi-xnsuxl-videocamera-solid"></i></button>
         </div>
-    </nav>
-    <div id="backgroundImage"></div>
-    <div id="content">
-        <h1>Hey, welcome to the <br /> Editor for NoteIT</h1>
-        <p>Before you begin, check this video out.</p>
-        <button type="button">Watch Video <i class="fi-xnsuxl-videocamera-solid"></i></button>
-    </div>
 
-    <!-- <script defer src="https://friconix.com/cdn/friconix.js"> </script> -->
+    </main>
+    <div id="fade"></div>
+    <div id="flashMessageWrap"></div>
 
     <script>
         window.fbAsyncInit = function () {

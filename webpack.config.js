@@ -94,14 +94,18 @@ if (currentTask === "build") {
   config.optimization = {
     splitChunks: { chunks: "all" },
   }; //separates vendors and custom scripts (vendor = editor.js)
-  config.plugins.push(
-    pages,
+  config.plugins = [
+    // new HtmlWebPackPlugin({
+    //   filename: "index.html",
+    //   template: `./src/index.html`,
+    // }),
+    ...pages,
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: "styles-[chunkhash].css",
     }),
-    new RunAfterCompile()
-  );
+    new RunAfterCompile(),
+  ];
 }
 
 module.exports = config;

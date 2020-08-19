@@ -2,12 +2,9 @@ body {
   overflow: hidden;
 }
 
-#backgroundImage {
-  position: absolute;
-  top: -2.5vh;
-  left: -5vw;
-  height: 105vh;
-  width: 110vw;
+#indexScreen {
+  height: 100vh;
+  width: 100vw;
   background: radial-gradient(
       circle,
       rgba(17, 17, 17, 0.4) 0%,
@@ -25,7 +22,7 @@ body {
   height: 40vh;
 
   h1 {
-  font-family: "Proza Libre", var(--headingFont);
+    font-family: "Proza Libre", var(--headingFont);
     font-size: 3.5rem;
     color: #f4f4f4;
     margin-bottom: 5vh;
@@ -46,7 +43,7 @@ body {
   ) !important;
 
   div {
-    width: 1200px;
+    max-width: 1200px;
     padding: 0.5rem 0;
     margin: auto;
     text-align: right;

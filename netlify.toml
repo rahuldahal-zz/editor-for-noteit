@@ -1,3 +1,4 @@
 [dev]
 	publish="src"
-
+[build]
+	functions="functions"

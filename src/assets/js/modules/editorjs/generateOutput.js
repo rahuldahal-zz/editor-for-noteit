@@ -1,14 +1,15 @@
-import LocalStorage from "./saveToLocalStorage";
+import Storage from "../storage";
 
 export default class SeeOutput {
   constructor(editor, seeOutputBtn, output) {
     this.output = output; // the "output" container
     this.editor = editor;
+    this.seeOutputBtn = seeOutputBtn;
     this.events();
   }
 
   events() {
-    seeOutputBtn.addEventListener("click", () => {
+    this.seeOutputBtn.addEventListener("click", () => {
       this.saveToLocalStorage();
     });
     this.hasPressedCtrl = false;
@@ -30,7 +31,7 @@ export default class SeeOutput {
       .save()
       .then((data) => {
         console.log(data.blocks);
-        new LocalStorage(data); // save to LocalStorage
+        new Storage("localStorage", { identifier: "progress", data: data }); // save to LocalStorage
         this.init(data.blocks);
       })
       .catch((error) => console.error(error));
