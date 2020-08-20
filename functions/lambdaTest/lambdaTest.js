@@ -1,6 +1,6 @@
 exports.handler = (event, context, callback)=>{
     const message = {
-        favNum = 9
+        favNum: 9
     };
 
     callback(null, {
