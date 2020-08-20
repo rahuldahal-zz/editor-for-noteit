@@ -5,7 +5,11 @@ dotenv.config();
 exports.handler = (event, context, callback)=>{
     const API_URL = process.env.GITHUB_TEST_API;
 
-    const dataThatCame = event.body.id;
+    let dataThatCame = "nothing";
+
+    if(event.body){
+    	dataThatCame = JSON.parse(event.body).id;
+    }
 
     fetch(API_URL)
     .then(res=>res.json())
