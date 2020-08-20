@@ -13,7 +13,7 @@ exports.handler = (event, context, callback) => {
   function sendToClient({ status, data }) {
     callback(null, {
       statusCode: status,
-      body: data,
+      body: JSON.stringify(data),
     });
   }
 
