@@ -99,6 +99,7 @@ export default class EditorSetup {
       submitBtn.addEventListener("click", () => {
         const output = document.getElementById("output");
         if (output.innerHTML) {
+          console.log(this.token);
           new SubmitNote(this.token);
           return;
         } else console.warn("The output is empty. Generate the output first.");

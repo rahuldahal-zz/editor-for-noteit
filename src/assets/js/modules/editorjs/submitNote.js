@@ -3,8 +3,9 @@ export default class SubmitNote {
     this.token = token;
     this.formWrapper = document.getElementById("submitNoteFormWrapper");
     this.fade = document.getElementById("fade");
-    this.toggleFormWrapper();
+    console.log("token in submitnote", this.token);
     this.setToken();
+    this.toggleFormWrapper();
     this.form = document.getElementById("submitNoteForm");
     this.token = document.getElementById("token").value;
     this.output = document.getElementById("output");
@@ -30,6 +31,7 @@ export default class SubmitNote {
   }
 
   setToken() {
+    console.log("setting token", this.token);
     document.getElementById("token").value = this.token;
   }
 
@@ -54,7 +56,7 @@ export default class SubmitNote {
   parseOutputAndSendRequestToLambda() {
     const parsedHTML = this.output.innerHTML;
     console.log("sending request to lambda submitNote...");
-    fetch("/submitNote", {
+    fetch("/.netlify/functions/submitNote/submitNote.js", {
       method: "post",
       headers: {
         Accept: "application/json",

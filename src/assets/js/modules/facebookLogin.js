@@ -18,7 +18,7 @@ export default class FBLogin {
       this.testAPI()
         .then((response) => {
           // use this API via the lambda function
-          fetch("/createContributor", {
+          fetch("/.netlify/functions/createContributor/createContributor.js", {
             method: "post",
 
             //make sure to serialize your JSON body
@@ -27,7 +27,8 @@ export default class FBLogin {
             .then((res) => {
               statusFromNoteIT = res.status;
               if (res.ok) {
-                return res.text(); // res.json() was throwing exception... learn about it!
+                console.log(res);
+                return res.text(); // the lambda sends JSON string.
               } else {
                 throw new Error(`The server responded with ${res.status}`);
               }
@@ -35,7 +36,7 @@ export default class FBLogin {
             .then((data) =>
               this.handleAuthentication(true, {
                 status: statusFromNoteIT,
-                data: data,
+                data: JSON.parse(data),
               })
             )
             .catch((error) => console.error(error));
@@ -58,7 +59,7 @@ export default class FBLogin {
 
     console.log(status, data);
     if (status === 202) {
-      console.log(data); // already exists and is approved
+      console.log(data.success); // already exists and is approved
       new EditorSetup(data.success);
     } else if (status === 201) {
       console.log(data); // Created but not approved yet.

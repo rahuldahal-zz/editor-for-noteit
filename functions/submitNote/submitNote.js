@@ -13,7 +13,7 @@ exports.handler = (event, context, callback) => {
   function sendToClient({ status, data }) {
     callback(null, {
       statusCode: status,
-      body: JSON.stringify(data),
+      body: data,
     });
   }
 
@@ -30,10 +30,10 @@ exports.handler = (event, context, callback) => {
     .then((res) => {
       console.log(res);
       statusFromNoteIT = res.status;
-      if (res.ok) {
-        return res.json();
+      if (statusFromNoteIT === 202) {
+        return res.text();
       } else {
-        throw new Error(`The server responded with ${res.status}`);
+        throw new Error(`The server responded with ${statusFromNoteIT}`);
       }
     })
     .then((data) =>
