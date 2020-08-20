@@ -27,7 +27,7 @@ export default class FBLogin {
             .then((res) => {
               statusFromNoteIT = res.status;
               if (res.ok) {
-                return res.json();
+                return res.text(); // res.json() was throwing exception... learn about it!
               } else {
                 throw new Error(`The server responded with ${res.status}`);
               }
