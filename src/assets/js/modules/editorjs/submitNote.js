@@ -56,7 +56,7 @@ export default class SubmitNote {
   parseOutputAndSendRequestToLambda() {
     const parsedHTML = this.output.innerHTML;
     console.log("sending request to lambda submitNote...");
-    fetch("/.netlify/functions/submitNote/submitNote.js", {
+    fetch("/submitNote", {
       method: "post",
       headers: {
         Accept: "application/json",

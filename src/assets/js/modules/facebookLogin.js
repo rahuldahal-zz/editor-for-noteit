@@ -18,7 +18,7 @@ export default class FBLogin {
       this.testAPI()
         .then((response) => {
           // use this API via the lambda function
-          fetch("/.netlify/functions/createContributor/createContributor.js", {
+          fetch("/createContributor", {
             method: "post",
 
             //make sure to serialize your JSON body

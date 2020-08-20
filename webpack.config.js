@@ -50,7 +50,6 @@ class RunAfterCompile {
   apply(compiler) {
     compiler.hooks.done.tap("Copy images", function () {
       fse.copySync("./src/assets/images", "./build/assets/images");
-      fse.copySync("./src/_redirects", "./build/_redirects");
     });
   }
 }
