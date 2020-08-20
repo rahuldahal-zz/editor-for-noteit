@@ -35,7 +35,7 @@ exports.handler = (event, context, callback) => {
         statusFromNoteIT === 201 ||
         statusFromNoteIT === 200
       ) {
-        return res.text();
+        return res.json();
       } else {
         throw new Error(`The server responded with ${statusFromNoteIT}`);
       }
