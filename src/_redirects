@@ -1,4 +1,4 @@
-https://editor-for-noteit.netlify.app/editor / 200
-https://editor-for-noteit.netlify.app/editor.html / 200
+https://editor-for-noteit.netlify.app/editor https://editor-for-noteit.netlify.app/ 200
+https://editor-for-noteit.netlify.app/editor.html https://editor-for-noteit.netlify.app/ 200
 https://editor-for-noteit.netlify.app/createContributor https://editor-for-noteit.netlify.app/.netlify/functions/createContributor/createContributor.js 200
 https://editor-for-noteit.netlify.app/submitNote https://editor-for-noteit.netlify.app/.netlify/functions/submitNote/submitNote.js 200
