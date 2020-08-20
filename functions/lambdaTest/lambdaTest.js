@@ -1,9 +1,7 @@
 const fetch = require("node-fetch");
-const dotenv = require("dotenv");
-dotenv.config();
 
 exports.handler = (event, context, callback)=>{
-    const API_URL = process.env.GITHUB_TEST_API;
+    const API_URL = "https://api.github.com/users/rahuldahal/repos?type=owner&sort=updated";
 
     let dataThatCame = "nothing";
 
