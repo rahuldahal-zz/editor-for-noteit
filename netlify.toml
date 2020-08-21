@@ -3,17 +3,18 @@
 [build]
 	functions="functions"
 
-[[redirects]]
-	from="/jpt"
-	to="/"
 
 [[redirects]]
 	from="/editor"
 	to="/"
+	status=200
+	force=true
 
 [[redirects]]
 	from="/editor.html"
 	to="/"
+	status=200
+	force=true
 
 [[redirects]]
 	from="/createContributor"
@@ -23,9 +24,4 @@
 [[redirects]]
 	from="/submitNote"
 	to="/.netlify/functions/submitNote"
-	status=200
-
-[[redirects]]
-	from="/lambdaTest"
-	to="/.netlify/functions/lambdaTest"
 	status=200
