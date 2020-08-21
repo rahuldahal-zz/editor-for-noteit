@@ -11,6 +11,7 @@ import MarginLeft from "./marginLeft";
 import MarginTop from "./marginTop";
 import GenerateOutput from "./generateOutput";
 import SubmitNote from "./submitNote";
+import FlashMessage from "../flashMessage";
 
 export default class EditorSetup {
   constructor(token) {
@@ -102,7 +103,12 @@ export default class EditorSetup {
           console.log(this.token);
           new SubmitNote(this.token);
           return;
-        } else console.warn("The output is empty. Generate the output first.");
+        } else {
+          console.warn("The output is empty. Generate the output first.");
+          new FlashMessage().warning(
+            "The output is empty. Generate the output first."
+          );
+        }
       });
     }
   }

@@ -1,4 +1,5 @@
 import EditorSetup from "./editorjs/editorSetup";
+import FlashMessage from "./flashMessage";
 
 export default class FBLogin {
   constructor(loginFunctionProvidedByFB) {
@@ -62,10 +63,21 @@ export default class FBLogin {
       // already exists and is approved
       new EditorSetup(data.success);
     } else if (status === 201) {
-      console.log(data); // Created but not approved yet.
+      // Created but not approved yet.
+      new FlashMessage().success(
+        "Your account is created. Wait for the approval to proceed."
+      );
+      console.log(data);
     } else if (status === 200) {
-      console.log(data); // already exists but not approved.
+      // already exists but not approved.
+      new FlashMessage().warning(
+        "You have not been approved yet. You will be notified via email after approval."
+      );
+      console.log(data);
     } else {
+      new FlashMessage().error(
+        "Sorry, there is some error with the server. Try again after a while."
+      );
       throw new Error("bogus status code is received!!");
     }
   }
