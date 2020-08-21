@@ -1,3 +1,5 @@
+import PreLoader from "../preloader";
+
 export default class SubmitNote {
   constructor(token) {
     this.token = token;
@@ -7,6 +9,8 @@ export default class SubmitNote {
     this.setToken();
     this.toggleFormWrapper();
     this.form = document.getElementById("submitNoteForm");
+    this.submitBtn = document.querySelector("#submitNoteForm button");
+    this.preloader = new PreLoader(this.submitBtn);
     this.token = document.getElementById("token").value;
     this.output = document.getElementById("output");
     this.events();
@@ -17,6 +21,7 @@ export default class SubmitNote {
     this.form.addEventListener("submit", (e) => {
       e.preventDefault();
       console.log(e.target);
+      this.preloader.show();
       this.getNoteDetails();
       this.parseOutputAndSendRequestToLambda();
     });
@@ -68,8 +73,14 @@ export default class SubmitNote {
         note: parsedHTML,
       }),
     })
-      .then((res) => res.text())
-      .then((data) => console.log(data))
+      .then((res) => {
+        if (res.ok) return res.text();
+        return new Error(`The request wasn't successful, ${res.status}`);
+      })
+      .then((data) => {
+        this.preloader.hide();
+        console.log(data);
+      })
       .catch((error) => console.log(error));
   }
 }

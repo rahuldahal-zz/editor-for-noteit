@@ -59,7 +59,7 @@ export default class FBLogin {
 
     console.log(status, data);
     if (status === 202) {
-      console.log(data.success); // already exists and is approved
+      // already exists and is approved
       new EditorSetup(data.success);
     } else if (status === 201) {
       console.log(data); // Created but not approved yet.

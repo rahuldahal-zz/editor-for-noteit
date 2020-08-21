@@ -106,6 +106,24 @@ button:active {
   transform: translateY(0) scale(0.9);
 }
 
+.preloader--accent {
+  background: url("/assets/images/gifs/preloader-whiteBG.gif");
+  background-color: var(--accentColor);
+}
+
+.preloader--white {
+  background: url("/assets/images/gifs/preloader-blueBG.gif");
+  background-color: #f4f4f4;
+}
+
+.preloader {
+  color: rgba(0, 0, 0, 0);
+  background-repeat: no-repeat;
+  background-position-y: 10px;
+  background-size: cover;
+  cursor: not-allowed;
+}
+
 #fade {
   visibility: hidden;
   position: absolute;
