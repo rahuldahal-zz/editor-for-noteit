@@ -7,13 +7,13 @@
 [[redirects]]
 	from="/editor"
 	to="/"
-	status=200
+	status=300
 	force=true
 
 [[redirects]]
 	from="/editor.html"
 	to="/"
-	status=200
+	status=300
 	force=true
 
 [[redirects]]

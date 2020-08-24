@@ -1,11 +1,11 @@
 import PreLoader from "../preloader";
+import FlashMessage from "../flashMessage";
 
 export default class SubmitNote {
   constructor(token) {
     this.token = token;
     this.formWrapper = document.getElementById("submitNoteFormWrapper");
     this.fade = document.getElementById("fade");
-    console.log("token in submitnote", this.token);
     this.setToken();
     this.toggleFormWrapper();
     this.form = document.getElementById("submitNoteForm");
@@ -36,7 +36,6 @@ export default class SubmitNote {
   }
 
   setToken() {
-    console.log("setting token", this.token);
     document.getElementById("token").value = this.token;
   }
 
@@ -59,8 +58,8 @@ export default class SubmitNote {
   // send this via lambda function
 
   parseOutputAndSendRequestToLambda() {
+    let statusFromNoteIT;
     const parsedHTML = this.output.innerHTML;
-    console.log("sending request to lambda submitNote...");
     fetch("/submitNote", {
       method: "post",
       headers: {
@@ -74,12 +73,16 @@ export default class SubmitNote {
       }),
     })
       .then((res) => {
-        if (res.ok) return res.text();
+        statusFromNoteIT = res.status;
+        if (res.ok) return res.json();
         return new Error(`The request wasn't successful, ${res.status}`);
       })
       .then((data) => {
         this.preloader.hide();
-        console.log(data);
+        if (statusFromNoteIT === 202) {
+          new FlashMessage().success(data.success);
+          this.toggleFormWrapper();
+        }
       })
       .catch((error) => console.log(error));
   }

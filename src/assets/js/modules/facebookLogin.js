@@ -30,8 +30,6 @@ export default class FBLogin {
               if (res.ok) {
                 console.log(res);
                 return res.text(); // the lambda sends JSON string.
-              } else {
-                throw new Error(`The server responded with ${res.status}`);
               }
             })
             .then((data) =>
@@ -58,7 +56,6 @@ export default class FBLogin {
       return console.log("You are not authenticated");
     }
 
-    console.log(status, data);
     if (status === 202) {
       // already exists and is approved
       new EditorSetup(data.success);
@@ -89,7 +86,6 @@ export default class FBLogin {
         user
       ) {
         if (user && !user.error) {
-          console.log(user);
           return resolve(user);
         } else {
           reject(user.error);

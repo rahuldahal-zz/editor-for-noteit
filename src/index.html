@@ -13,7 +13,7 @@
         <nav id="indexNav">
             <div id="links">
                 <a href="about" class="btn">About</a>
-                <button id="loginBtn">Login</button>
+                <button id="loginBtn">Login <i class="fi-xwsuxl-sign-in-solid"></i></button>
             </div>
         </nav>
         <div id="content">
@@ -37,9 +37,10 @@
                 version: "v7.0"
             });
 
-            // FB.getLoginStatus(function (response) {
-            //     statusChangeCallback(response);
-            // });
+            FB.getLoginStatus(function (response) {
+                // statusChangeCallback(response);
+                console.log(response);
+            });
 
         };
 
