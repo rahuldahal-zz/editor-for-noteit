@@ -25,3 +25,8 @@
 	from="/submitNote"
 	to="/.netlify/functions/submitNote"
 	status=200
+
+[[redirects]]
+	from="/login"
+	to="/.netlify/functions/loginInit"
+	status=200

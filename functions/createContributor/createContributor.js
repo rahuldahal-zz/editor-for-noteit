@@ -3,6 +3,12 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 exports.handler = (event, context, callback) => {
+  if (event.httpMethod !== "POST") {
+    return callback(null, {
+      statusCode: 400,
+    });
+  }
+
   console.log("the incoming body data is: ", event.body);
   const responseFromFacebook = event.body;
 

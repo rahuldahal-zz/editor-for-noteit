@@ -1,5 +1,6 @@
 import FBLogin from "./modules/facebookLogin";
-window.FB = undefined; // defining FB manually, just to get access to it on network failure.
+const login = new FBLogin();
+login.init(); // gets invoked after facebook redirects to "/" with the access token
 import PreLoader from "./modules/preloader";
 import FlashMessage from "./modules/flashMessage";
 import EditorSetup from "./modules/editorjs/editorSetup";
@@ -22,18 +23,12 @@ const loginBtn = document.getElementById("loginBtn");
 if (loginBtn) {
   loginBtn.addEventListener("click", () => {
     console.log("login button is clicked");
-    if (!FB) {
-      console.log("Hey");
-      return new FlashMessage().error(
-        "The browser cannot connect to the internet, check your connection."
-      );
-    }
     new PreLoader(loginBtn).show();
     // resolveAfter(3000).then((message) => {
     //   console.log(message);
     //   new EditorSetup("someTokenValue");
     // });
-    new FBLogin(FB.login); // passing the login() into the constructor
+    login.login();
   });
 }
 
