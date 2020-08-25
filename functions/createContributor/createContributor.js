@@ -17,7 +17,7 @@ exports.handler = (event, context, callback) => {
   // the "callback" is used to send response back to the client.
 
   function sendToClient({ status, data }) {
-    callback(null, {
+    return callback(null, {
       statusCode: status,
       body: JSON.stringify(data),
     });

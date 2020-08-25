@@ -19,11 +19,11 @@ import "simplebar/dist/simplebar.css";
 // facebook login
 
 const loginBtn = document.getElementById("loginBtn");
-
+const preLoader = new PreLoader(loginBtn);
 if (loginBtn) {
   loginBtn.addEventListener("click", () => {
     console.log("login button is clicked");
-    new PreLoader(loginBtn).show();
+    preLoader.show();
     // resolveAfter(3000).then((message) => {
     //   console.log(message);
     //   new EditorSetup("someTokenValue");

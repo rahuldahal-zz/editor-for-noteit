@@ -6,19 +6,27 @@ export default class FBLogin {
   constructor() {}
 
   init() {
-    if (window.location.hash) {
+    if (window.location.search) {
       fetch("/login", {
         method: "post",
         contentType: "application/json",
         body: JSON.stringify({
-          token: window.location.hash,
+          code: window.location.search,
         }),
       })
-        .then((res) => res.json())
-        .then((user) => this.sendRequestToNoteIT(user));
+        .then((res) => {
+          if (res.ok) return res.json();
+          else throw new Error(res.status);
+        })
+        .then((user) => this.sendRequestToNoteIT(user))
+        .catch((error) => {
+          console.log(error);
+          return window.location.replace("/"); // because the codeFromFBRedirect may have expired.
+        });
     }
   }
   sendRequestToNoteIT(user) {
+    console.log("sending request to NoteIT...");
     let statusFromNoteIT;
     fetch("/createContributor", {
       method: "post",
@@ -32,7 +40,12 @@ export default class FBLogin {
       .then((data) => {
         switch (statusFromNoteIT) {
           case 202:
+            window.localStorage.setItem(
+              "lastLoggedIn",
+              new Date().toLocaleString()
+            );
             new EditorSetup(data.success);
+            break;
         }
       });
   }
@@ -46,7 +59,10 @@ export default class FBLogin {
     })
       .then((res) => res.text())
       .then((url) => this.redirectToFacebook(url))
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error);
+        flash.error(error);
+      });
   }
 
   redirectToFacebook(url) {
