@@ -14,8 +14,7 @@ import SubmitNote from "./submitNote";
 import FlashMessage from "../flashMessage";
 
 export default class EditorSetup {
-  constructor(token) {
-    this.token = token;
+  constructor() {
     this.loadEditor();
   }
 
@@ -100,8 +99,7 @@ export default class EditorSetup {
       submitBtn.addEventListener("click", () => {
         const output = document.getElementById("output");
         if (output.innerHTML) {
-          console.log(this.token);
-          new SubmitNote(this.token);
+          new SubmitNote();
           return;
         } else {
           console.warn("The output is empty. Generate the output first.");

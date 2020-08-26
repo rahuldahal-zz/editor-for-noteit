@@ -46,12 +46,22 @@ exports.handler = (event, context, callback) => {
         throw new Error(`The server responded with ${statusFromNoteIT}`);
       }
     })
-    .then((data) =>
-      sendToClient({
-        status: statusFromNoteIT,
-        data: data,
-      })
-    )
+    .then((data) => {
+      console.log(data);
+      if (statusFromNoteIT === 202) {
+        return callback(null, {
+          statusCode: statusFromNoteIT,
+          headers: {
+            "Set-Cookie": `token=${data.success}; httpOnly=true; max-age=1800; sameSite=strict`,
+          },
+        });
+      } else {
+        sendToClient({
+          status: statusFromNoteIT,
+          data: data,
+        });
+      }
+    })
     .catch((error) =>
       sendToClient({
         status: statusFromNoteIT,

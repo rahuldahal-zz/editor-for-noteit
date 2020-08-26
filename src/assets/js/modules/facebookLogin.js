@@ -15,7 +15,7 @@ export default class FBLogin {
         }),
       })
         .then((res) => {
-          if (res.ok) return res.json();
+          if (res.status === 200) return res.json();
           else throw new Error(res.status);
         })
         .then((user) => this.sendRequestToNoteIT(user))
@@ -44,7 +44,7 @@ export default class FBLogin {
               "lastLoggedIn",
               new Date().toLocaleString()
             );
-            new EditorSetup(data.success);
+            new EditorSetup();
             break;
         }
       });
