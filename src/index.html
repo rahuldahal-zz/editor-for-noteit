@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="dns-prefetch" href="/src/assets/images/gifs/preloader-blueBG.gif">
+    <link rel="dns-prefetch" href="/src/assets/images/gifs/preloader-whiteBG.gif">
     <title>Editor for NoteIT</title>
 </head>
 
@@ -13,7 +15,8 @@
         <nav id="indexNav">
             <div id="links">
                 <a href="about" class="btn">About</a>
-                <button id="loginBtn">Login <i class="fi-xwsuxl-sign-in-solid"></i></button>
+                <button id="loginBtn" title="Log in with facebook">Login <i
+                        class="fi-xwsuxl-sign-in-solid"></i></button>
             </div>
         </nav>
         <div id="content">
@@ -23,6 +26,7 @@
         </div>
 
     </main>
+    <div id="fullscreenLoader" data-loading-text="Logging you in..."></div>
     <div id="fade"></div>
     <div id="flashMessageContainer">
         <p id="flashMessage"></p>

@@ -9,7 +9,6 @@ exports.handler = (event, context, callback) => {
     });
   }
 
-  console.log("the incoming body data is: ", event.body);
   const responseFromFacebook = event.body;
 
   const API_URL = process.env.API_CREATE_CONTRIBUTOR_URL;
@@ -24,6 +23,8 @@ exports.handler = (event, context, callback) => {
   }
 
   let statusFromNoteIT;
+
+  console.time("execution");
 
   fetch(API_URL, {
     method: "post",
@@ -49,6 +50,7 @@ exports.handler = (event, context, callback) => {
     .then((data) => {
       console.log(data);
       if (statusFromNoteIT === 202) {
+        console.timeEnd("execution");
         return callback(null, {
           statusCode: statusFromNoteIT,
           headers: {
@@ -56,6 +58,7 @@ exports.handler = (event, context, callback) => {
           },
         });
       } else {
+        console.log("sending error response on first try ?");
         sendToClient({
           status: statusFromNoteIT,
           data: data,

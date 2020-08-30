@@ -29,17 +29,18 @@ exports.handler = (event, context, callback) => {
       `https://graph.facebook.com/v8.0/oauth/access_token?client_id=${client_id}&redirect_uri=${redirect_uri}&client_secret=${client_secret}&code=${codeFromFB.code}`
     )
       .then((res) => {
+        console.log(res.status, res.ok);
         if (res.ok) {
           console.log("I expire after use...");
           return res.json();
         }
-        return new Error("generic error message here...");
+        throw new Error("generic error message here...");
       })
       .then((accessToken) => getUserDetails(accessToken))
       .catch((error) =>
         callback(null, {
           statusCode: 400,
-          body: error,
+          body: JSON.stringify(error),
         })
       );
   }

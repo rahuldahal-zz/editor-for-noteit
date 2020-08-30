@@ -104,7 +104,7 @@ export default class EditorSetup {
         } else {
           console.warn("The output is empty. Generate the output first.");
           new FlashMessage().warning(
-            "The output is empty. Generate the output first."
+            "You've not saved your progress. Click on the editor and press <kbd>Ctrl+S</kbd> to save."
           );
         }
       });

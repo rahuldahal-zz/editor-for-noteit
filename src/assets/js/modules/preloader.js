@@ -1,15 +1,18 @@
 export default class PreLoader {
-  constructor(button) {
-    this.button = button;
+  constructor({ element, cssClasses }) {
+    typeof element === "object"
+      ? (this.element = element)
+      : (this.element = document.querySelector(element));
+    this.cssClasses = cssClasses;
   }
 
   show() {
-    this.button.style.minWidth = `${this.button.offsetWidth}px`;
-    this.button.style.height = `${this.button.offsetHeight}px`;
-    this.button.classList.add("preloader", "preloader--accent");
+    this.element.style.minWidth = `${this.element.offsetWidth}px`;
+    this.element.style.height = `${this.element.offsetHeight}px`;
+    this.element.classList.add(...this.cssClasses);
   }
 
   hide() {
-    this.button.classList.remove("preloader", "preloader--accent");
+    this.element.classList.remove(...this.cssClasses);
   }
 }

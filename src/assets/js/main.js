@@ -4,6 +4,13 @@ import FlashMessage from "./modules/flashMessage";
 import EditorSetup from "./modules/editorjs/editorSetup";
 import ExternalResources from "./modules/externalResourcesHandler";
 
+// const fullscreen = new PreLoader({
+//   element: "#fullscreenLoader",
+//   cssClasses: ["preloader", "visible"],
+// });
+
+// fullscreen.show();
+
 // styles
 
 import "extended-normalize.css";
@@ -23,6 +30,7 @@ import "simplebar/dist/simplebar.css";
 
   if (!lastLoggedIn) {
     console.log("lastLoggedIn is not present");
+    hasFBCodeExpired();
     return renderFBLoginScript();
   }
   if ((currentTime - new Date(lastLoggedIn)) / 1000 / 60 < 30) {
@@ -30,6 +38,8 @@ import "simplebar/dist/simplebar.css";
   }
 
   console.log("lastLoggedIn has expired!");
+  localStorage.removeItem("lastLoggedIn");
+  hasFBCodeExpired();
   return renderFBLoginScript();
 })();
 
@@ -40,27 +50,39 @@ function renderFBLoginScript() {
   login.init(); // gets invoked after facebook redirects to "/" with the access token
 
   const loginBtn = document.getElementById("loginBtn");
-  const preLoader = new PreLoader(loginBtn);
+  const preLoader = new PreLoader({
+    element: loginBtn,
+    cssClasses: ["preloader", "preloader--accent"],
+  });
   if (loginBtn) {
     loginBtn.addEventListener("click", () => {
       console.log("login button is clicked");
       preLoader.show();
       // resolveAfter(3000).then((message) => {
       //   console.log(message);
-      //   new EditorSetup("someTokenValue");
+      //   new EditorSetup();
       // });
       login.login();
     });
   }
 }
 
+// if "fbCodeExpired" is set on sessionStorage, warn user to re-login
+function hasFBCodeExpired() {
+  const fbCodeExpired = sessionStorage.getItem("fbCodeExpired");
+  if (fbCodeExpired) {
+    new FlashMessage().warning(fbCodeExpired);
+    sessionStorage.removeItem("fbCodeExpired");
+  }
+}
+
 // test when offline, delete this later
 
-// function resolveAfter(duration) {
-//   return new Promise((resolve, reject) => {
-//     setTimeout(() => resolve(`${duration} has passed.`), duration);
-//   });
-// }
+function resolveAfter(duration) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => resolve(`${duration} has passed.`), duration);
+  });
+}
 
 // external resources
 

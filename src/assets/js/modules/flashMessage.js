@@ -1,26 +1,29 @@
 export default class FlashMessage {
   constructor() {
     this.messageElement = document.getElementById("flashMessage");
+    this.clickListenerBind = this.hide.bind(this);
   }
 
   // events
-  events() {}
+  events() {
+    document.addEventListener("click", this.clickListenerBind);
+  }
 
   // methods
   error(message) {
-    this.messageElement.textContent = message;
+    this.messageElement.innerHTML = message;
     this.messageElement.classList.add("flashMessage--error");
     this.show();
   }
 
   warning(message) {
-    this.messageElement.textContent = message;
+    this.messageElement.innerHTML = message;
     this.messageElement.classList.add("flashMessage--warning");
     this.show();
   }
 
   success(message) {
-    this.messageElement.textContent = message;
+    this.messageElement.innerHTML = message;
     this.messageElement.classList.add("flashMessage--success");
     this.show();
   }
@@ -28,11 +31,20 @@ export default class FlashMessage {
   show() {
     this.messageElement.classList.add("flashMessage--active");
 
-    setTimeout(() => this.hide(), 3000);
+    setTimeout(() => this.events(), 3000);
   }
 
-  hide() {
-    this.messageElement.textContent = "";
-    this.messageElement.removeAttribute("class");
+  hide(e) {
+    console.log(e.target);
+    if (e.target !== this.messageElement) {
+      this.messageElement.textContent = "";
+      this.messageElement.removeAttribute("class");
+      this.removeClickListener(document);
+    }
+  }
+
+  removeClickListener(element) {
+    console.log("Removing click listener...");
+    element.removeEventListener("click", this.clickListenerBind);
   }
 }

@@ -1,5 +1,6 @@
 import PreLoader from "../preloader";
 import FlashMessage from "../flashMessage";
+const flash = new FlashMessage();
 
 export default class SubmitNote {
   constructor() {
@@ -8,7 +9,10 @@ export default class SubmitNote {
     this.toggleFormWrapper();
     this.form = document.getElementById("submitNoteForm");
     this.submitBtn = document.querySelector("#submitNoteForm button");
-    this.preloader = new PreLoader(this.submitBtn);
+    this.preloader = new PreLoader({
+      element: this.submitBtn,
+      cssClasses: ["preloader", "preloader--accent"],
+    });
     this.output = document.getElementById("output");
     this.events();
   }
@@ -67,15 +71,18 @@ export default class SubmitNote {
       .then((res) => {
         statusFromNoteIT = res.status;
         if (res.ok) return res.json();
-        return new Error(`The request wasn't successful, ${res.status}`);
+        throw new Error(`The request wasn't successful, ${res.status}`);
       })
       .then((data) => {
         this.preloader.hide();
         if (statusFromNoteIT === 202) {
-          new FlashMessage().success(data.success);
+          flash.success(data.success);
           this.toggleFormWrapper();
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        flash.error(error); // work on showing proper error message, depending upon the status
+        this.preloader.hide();
+      });
   }
 }
