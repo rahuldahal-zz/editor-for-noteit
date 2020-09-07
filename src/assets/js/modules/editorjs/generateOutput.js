@@ -33,6 +33,7 @@ export default class SeeOutput {
         console.log(data.blocks);
         new Storage("localStorage", { identifier: "progress", data: data }); // save to LocalStorage
         this.init(data.blocks);
+        giveIDs();
       })
       .catch((error) => console.error(error));
   }
@@ -43,7 +44,6 @@ export default class SeeOutput {
     const subArrayFunc = createSubArray(blocks); // the "closure" function, if I could say so...
 
     let subTopicWrappers = []; // array of "subTopicWraps", the "<section class="subTopicWrap">"
-
     blocks.forEach((block) => {
       if (block.data.level === 2) subTopicWrappers.push(subArrayFunc()); // if current block is a "h2", call the innerFunction
     });
@@ -95,21 +95,21 @@ export default class SeeOutput {
   headerHandler(data) {
     switch (data.level) {
       case 2:
-        return `<h2 class="subTopic">${data.text}</h2>`;
+        return `<h2 class="subTopic output-header">${data.text}</h2>`;
       case 3:
-        return `<h3>${data.text}</h3>`;
+        return `<h3 class="output-header">${data.text}</h3>`;
       case 4:
-        return `<h4>${data.text}</h4>`;
+        return `<h4 class="output-header">${data.text}</h4>`;
     }
   }
   paragraphHandler(data) {
     data.text = this.replaceTags(data.text, ["b>", "i>"], ["strong>", "em>"]);
 
     if (/<(span)\sclass="ml?t?1?2?rem">/.test(data.text)) {
-      return data.text.replace(/span/g, "p");
-    } else return `<p>${data.text}</p>`;
+      data.text.replace(/span/g, "p");
+    } else return `<p class="output-paragraph">${data.text}</p>`;
 
-    return `<p>${data.text}</p>`;
+    return `<p class="output-paragraph">${data.text}</p>`;
   }
   listHandler(data) {
     let dtRegex = /^<dt class="helloStyle">[a-zA-Z\s?]+:?\s?<\/dt>/i;
@@ -118,13 +118,13 @@ export default class SeeOutput {
         case "ordered":
           return `
 						<ol>
-							${data.items.map((li) => `<li>${li}</li>`).join("")}
+							${data.items.map((li) => `<li class="output-list-item">${li}</li>`).join("")}
 						</ol>
 					`;
         case "unordered":
           return `
 						<ul>
-							${data.items.map((li) => `<li>${li}</li>`).join("")}
+							${data.items.map((li) => `<li class="output-list-item">${li}</li>`).join("")}
 						</ul>
 					`;
       }
@@ -146,7 +146,11 @@ export default class SeeOutput {
               .trim();
             return `
 					${dtText}
-					<dd>${this.replaceTags(ddText, ["b>", "i>"], ["strong>", "em>"])}</dd>
+					<dd class="output-list-item">${this.replaceTags(
+            ddText,
+            ["b>", "i>"],
+            ["strong>", "em>"]
+          )}</dd>
 			`;
           })
           .join("")}
@@ -155,7 +159,7 @@ export default class SeeOutput {
   }
   tableHandler(data) {
     return `
-			<table>
+			<table class="output-table">
 				${data.content
           .map((row, index) => {
             return `
@@ -176,7 +180,7 @@ export default class SeeOutput {
   }
 
   imageHandler(data) {
-    return `<img src="${data.url}" alt="${data.caption}">`;
+    return `<img class="output-image" src="${data.url}" alt="${data.caption}">`;
   }
 
   quoteHandler(data) {
@@ -213,4 +217,17 @@ function createSubArray(blocks) {
     // return {subArray: subArray, startFrom: startFrom};
     return subArray;
   };
+}
+
+// Give IDs to blocks
+
+function giveIDs() {
+  const paragraphs = document.querySelectorAll(".output-paragraph");
+  const listItems = document.querySelectorAll(".output-list-item");
+  const headers = document.querySelectorAll(".output-header");
+  const tables = document.querySelectorAll(".output-table");
+  const editableItems = [...paragraphs, ...listItems, ...headers, ...tables];
+  editableItems.forEach((item, index) => {
+    item.setAttribute("data-block-id", `block${index}`);
+  });
 }

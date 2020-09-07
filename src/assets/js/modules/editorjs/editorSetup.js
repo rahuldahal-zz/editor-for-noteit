@@ -5,13 +5,15 @@ import Quote from "@editorjs/quote";
 import Table from "@editorjs/table";
 import SimpleImage from "@editorjs/simple-image";
 import Marker from "@editorjs/marker";
-import DescriptionTitle from "./descriptionTitle_inlineTool";
-import WordMeaning from "./wordMeaning_inlineTool";
-import MarginLeft from "./marginLeft";
-import MarginTop from "./marginTop";
+import DescriptionTitle from "./plugins/descriptionTitle_inlineTool";
+import WordMeaning from "./plugins/wordMeaning_inlineTool";
+import MarginLeft from "./plugins/marginLeft";
+import MarginTop from "./plugins/marginTop";
 import GenerateOutput from "./generateOutput";
 import SubmitNote from "./submitNote";
 import FlashMessage from "../flashMessage";
+import Miscellaneous from "./misc";
+let misc; // is initialized as soon as the editor is loaded
 
 export default class EditorSetup {
   constructor() {
@@ -81,8 +83,13 @@ export default class EditorSetup {
 
     editor.isReady.then(() => {
       let progress = JSON.parse(localStorage.getItem("progress"));
-      if (progress) editor.render(progress);
-      editor.focus();
+      if (progress) {
+        editor.render(progress).then(() => {
+          editor.focus();
+          misc = new Miscellaneous();
+          misc.giveIDToEditableItems();
+        });
+      }
     });
 
     // rendering the content
