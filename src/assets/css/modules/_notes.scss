@@ -80,17 +80,18 @@
 
   dl dt {
     font-size: 1.1rem;
-    font-family: inherit;
+    // font-family: inherit;
     margin: 1rem 0 0.3rem 0;
+    color: var(--accentColor);
   }
 
   dl dd {
     margin-left: 10px;
   }
 
-  // .emphasis {
-  //   font-size: 1.1em;
-  // }
+  br {
+    margin-bottom: 0.5rem;
+  }
 
   .underline {
     text-decoration: underline;

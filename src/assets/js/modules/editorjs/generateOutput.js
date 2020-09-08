@@ -33,7 +33,7 @@ export default class SeeOutput {
         console.log(data.blocks);
         new Storage("localStorage", { identifier: "progress", data: data }); // save to LocalStorage
         this.init(data.blocks);
-        giveIDs();
+        giveIDs(this.output);
       })
       .catch((error) => console.error(error));
   }
@@ -221,13 +221,16 @@ function createSubArray(blocks) {
 
 // Give IDs to blocks
 
-function giveIDs() {
+function giveIDs(output) {
   const paragraphs = document.querySelectorAll(".output-paragraph");
   const listItems = document.querySelectorAll(".output-list-item");
   const headers = document.querySelectorAll(".output-header");
   const tables = document.querySelectorAll(".output-table");
   const editableItems = [...paragraphs, ...listItems, ...headers, ...tables];
+  const containerFromTop = output.getBoundingClientRect().top;
   editableItems.forEach((item, index) => {
+    let toScrollForView = item.getBoundingClientRect().top - containerFromTop;
     item.setAttribute("data-block-id", `block${index}`);
+    item.setAttribute("data-scroll-for-view", toScrollForView);
   });
 }

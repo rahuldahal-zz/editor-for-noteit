@@ -155,4 +155,41 @@ button:active {
   }
 }
 
+.beatAnimation {
+  position: relative;
+  &::after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 0.5em;
+    left: 0.5em;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    background: var(--accentColor);
+    animation: beat 1s 0.3s linear forwards;
+  }
+}
+
+@keyframes beat {
+  25% {
+    transform: scale(0.3);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  60% {
+    transform: scale(0.3);
+  }
+  75% {
+    transform: scale(1.1);
+  }
+  95% {
+    transform: scale(0.3);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
 // notes
