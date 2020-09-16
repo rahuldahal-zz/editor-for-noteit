@@ -1,6 +1,6 @@
 export default class FlashMessage {
   constructor() {
-    this.messageElement = document.getElementById("flashMessage");
+    this.messageElement = document.querySelector(".flashMessage__message");
     this.clickListenerBind = this.hide.bind(this);
   }
 
