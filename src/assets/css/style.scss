@@ -4,13 +4,13 @@
   box-sizing: border-box;
 }
 
+body {
+  overflow: hidden;
+  background-color: #f4f4f4;
+}
+
 @import "modules/editor.scss";
 @import "modules/index.scss";
 @import "modules/_submitNoteForm";
 @import "modules/_base";
 @import "modules/_notes";
-
-body {
-  overflow-y: hidden;
-  background-color: #f4f4f4;
-}

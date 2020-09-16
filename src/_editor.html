@@ -1,20 +1,23 @@
-<main id="editorScreen">
-	<nav>
-		<button id="clearAll" title="Clear All progress">Clear <i class="fi-xnsuxl-trash-solid"></i></button>
-		<button id="seeOutputBtn" title="Save and See Output">Save(Ctrl+S) <i
+<main class="editorScreen">
+	<nav class="editorNav">
+		<button class="editorNav__btn" id="clearAll" title="Clear All progress">Clear <i
+				class="fi-xnsuxl-trash-solid"></i></button>
+		<button class="editorNav__btn" id="seeOutputBtn" title="Save and See Output">Save(Ctrl+S) <i
 				class="fi-xwsuxl-sign-in-solid"></i></button>
-		<button id="submitBtn" title="Submit the Note">Submit <i class="fi-xnsuxl-share-solid"></i></button>
-		<button id="help" title="I need help">Help ? <i class="fi-xwsuxl-sign-in-solid"></i></button>
+		<button class="editorNav__btn" id="submitBtn" title="Submit the Note">Submit <i
+				class="fi-xnsuxl-share-solid"></i></button>
+		<button class="editorNav__btn" id="help" title="I need help">Help ? <i
+				class="fi-xwsuxl-sign-in-solid"></i></button>
 	</nav>
 
-	<section id="container">
-		<div id="editor-output-wrap">
-			<div id="editorjsWrap" data-simplebar data-simplebar-auto-hide="false">
-				<div id="editorjs"></div>
+	<section class="editorContent">
+		<div class="editorContent__editorOutputWrap">
+			<div class="editorContent__editorjsWrap" data-simplebar data-simplebar-auto-hide="false">
+				<div id="editorjs" class="editorContent__editorjs"></div>
 			</div>
 			<!-- for some reasons, the "simple scrollbar only works when there is only one children element" -->
-			<div id="outputWrap" data-simplebar data-simplebar-auto-hide="false">
-				<div id="output"></div>
+			<div class="editorContent__outputWrap" data-simplebar data-simplebar-auto-hide="false">
+				<div class="editorContent__output"></div>
 			</div>
 		</div>
 	</section>

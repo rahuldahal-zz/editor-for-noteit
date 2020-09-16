@@ -11,25 +11,26 @@
 
 <body>
 
-    <main id="indexScreen">
-        <nav id="indexNav">
-            <div id="links">
-                <a href="about" class="btn">About</a>
-                <button id="loginBtn" title="Log in with facebook">Login <i
-                        class="fi-xwsuxl-sign-in-solid"></i></button>
+    <main class="indexScreen">
+        <nav class="indexNav">
+            <div class="indexNav__linksWrap">
+                <a href="about" class="indexNav__link">About</a>
+                <button id="loginBtn" class="indexNav__link indexNav__link--whiteText"
+                    title="Log in with facebook">Login <i class="fi-xwsuxl-sign-in-solid"></i>
+                </button>
             </div>
         </nav>
-        <div id="content">
-            <h1>Hey, welcome to the <br /> Editor for NoteIT</h1>
-            <p>Before you begin, check this video out.</p>
-            <button type="button">Watch Video <i class="fi-xnsuxl-videocamera-solid"></i></button>
-        </div>
+        <section class="hero">
+            <h1 class="hero__title">Hey, welcome to the <br /> Editor for NoteIT</h1>
+            <p class="hero__subtitle">Before you begin, check this video out.</p>
+            <button class="hero__cta" type="button">Watch Video <i class="fi-xnsuxl-videocamera-solid"></i></button>
+        </section>
 
     </main>
-    <div id="fullscreenLoader" data-loading-text="Logging you in..."></div>
-    <div id="fade"></div>
-    <div id="flashMessageContainer">
-        <p id="flashMessage"></p>
+    <div class="fullscreenLoader" data-loading-text="Logging you in..."></div>
+    <div class="fade"></div>
+    <div class="flashMessage">
+        <p class="flashMessage__message"></p>
     </div>
 
     <script src="bundled.js"></script>

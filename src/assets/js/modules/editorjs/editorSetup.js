@@ -32,7 +32,7 @@ export default class EditorSetup {
   }
 
   replaceIndexScreen(data) {
-    const indexScreen = document.getElementById("indexScreen");
+    const indexScreen = document.querySelector(".indexScreen");
     indexScreen.parentElement.removeChild(indexScreen);
     document.body.insertAdjacentHTML("afterbegin", data);
 
@@ -95,7 +95,7 @@ export default class EditorSetup {
     // rendering the content
 
     const seeOutputBtn = document.getElementById("seeOutputBtn");
-    const outputElement = document.getElementById("output");
+    const outputElement = document.querySelector(".editorContent__output");
 
     new GenerateOutput(editor, seeOutputBtn, outputElement); // save is also handled in that module
 

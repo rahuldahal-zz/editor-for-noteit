@@ -1,12 +1,14 @@
 export default class Miscellaneous {
   constructor() {
-    this.editorContainer = document.querySelector("#editorjsWrap ");
-    this.outputContainer = document.querySelector("#outputWrap ");
+    this.editorContainer = document.querySelector(
+      ".editorContent__editorjsWrap"
+    );
+    this.outputContainer = document.querySelector(".editorContent__outputWrap");
     this.editorScrollContainer = document.querySelector(
-      "#editorjsWrap .simplebar-content-wrapper"
+      ".editorContent__editorjsWrap .simplebar-content-wrapper"
     );
     this.outputScrollContainer = document.querySelector(
-      "#outputWrap .simplebar-content-wrapper"
+      ".editorContent__outputWrap .simplebar-content-wrapper"
     );
     this.scrollToClickedBlock();
   }
@@ -56,7 +58,7 @@ export default class Miscellaneous {
       : (scrollContainer = this.editorScrollContainer);
 
     const targetElement = (this.previousBlock = document.querySelector(
-      `#${on} [data-block-id="${blockID}"]`
+      `.editorContent__${on} [data-block-id="${blockID}"]`
     ));
     const scrollPosition = targetElement.dataset.scrollForView;
     scrollContainer.scrollTop = scrollPosition - this.PADDING_WHEN_SCROLLED_TO;

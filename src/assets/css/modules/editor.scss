@@ -1,21 +1,19 @@
-#editorScreen {
-  nav {
-    display: flex;
-    width: 100vw;
-    background-color: #333;
-    padding: 0.5rem;
-  }
+.editorNav {
+  display: flex;
+  width: 100vw;
+  background-color: #333;
+  padding: 0.5rem;
 
-  nav button {
+  &__btn {
     margin-right: 20px;
   }
+}
 
-  #container {
-    display: flex;
-    min-height: 100vh;
-  }
+.editorContent {
+  display: flex;
+  min-height: 100vh;
 
-  #container::after {
+  &::after {
     content: "";
     height: 70%;
     width: 100%;
@@ -26,13 +24,7 @@
     filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.4));
   }
 
-  .codex-editor {
-    position: absolute;
-    top: 1rem;
-    width: 90%;
-  }
-
-  #editor-output-wrap {
+  &__editorOutputWrap {
     margin: auto;
     position: relative;
     z-index: 2;
@@ -41,104 +33,103 @@
     justify-content: space-between;
   }
 
-  #editorjsWrap,
-  #outputWrap {
+  &__editorjsWrap,
+  &__outputWrap {
     width: 45vw;
     height: 80vh;
     padding: 1rem;
     background-color: #f4f4f4;
     border-top-right-radius: 1rem;
     filter: drop-shadow(0 -6px 12px rgba(0, 0, 0, 0.2));
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 100%;
+      z-index: 4;
+      width: max-content;
+      padding: 0.5rem 1rem;
+      background-color: var(--primaryTextColor);
+      color: #eee;
+      border-top-left-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
+      box-shadow: 0 -6px 12px rgba(0, 0, 0, 0.2);
+    }
   }
 
-  #editorjsWrap::before,
-  #outputWrap::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 100%;
-    z-index: 4;
-    width: max-content;
-    padding: 0.5rem 1rem;
-    background-color: var(--primaryTextColor);
-    color: #eee;
-    border-top-left-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
-    box-shadow: 0 -6px 12px rgba(0, 0, 0, 0.2);
-  }
-
-  #editorjsWrap::before {
+  &__editorjsWrap::before {
     content: "Edit your content here...";
   }
 
-  #outputWrap:before {
+  &__outputWrap::before {
     content: "And this is how it will look on the App...";
   }
 
-  #outputWrap,
-  #editorjsWrap {
-    width: 45vw;
-    height: 80vh;
-  }
-
-  #output,
-  #editorjs {
+  &__output,
+  &__editorjs {
     height: 100%;
     min-height: 80vh;
     padding-top: 0;
     padding-bottom: 1rem;
   }
+}
 
-  .ce-header {
-    padding: 0.5rem 0 !important;
-    margin-bottom: 0 !important;
-  }
+.codex-editor {
+  position: absolute;
+  top: 1rem;
+  width: 90%;
+}
 
-  .cdx-marker {
-    background: none;
-    position: sticky;
-  }
+.ce-header {
+  padding: 0.5rem 0 !important;
+  margin-bottom: 0 !important;
+}
 
-  .tc-table__wrap {
-    border: none;
-  }
+.cdx-marker {
+  background: none;
+  position: sticky;
+}
 
-  .ce-paragraph {
-    line-height: 1.3 !important;
-  }
+.tc-table__wrap {
+  border: none;
+}
 
-  .inlineTool__input {
-    width: 100%;
-    padding: 0.5rem 1rem;
-  }
+.ce-paragraph {
+  line-height: 1.3 !important;
+}
 
-  svg {
-    width: 1rem;
-    height: 1.2rem;
-  }
+.inlineTool__input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+}
 
-  .ce-settings svg {
-    width: 100%;
-  }
+svg {
+  width: 1rem;
+  height: 1.2rem;
+}
 
-  .ml1rem {
-    margin-left: 1rem;
-    display: block;
-  }
+.ce-settings svg {
+  width: 100%;
+}
 
-  .mt2rem {
-    margin-top: 2rem;
-    display: block;
-  }
+.ml1rem {
+  margin-left: 1rem;
+  display: block;
+}
 
-  #output {
-    background-color: #f4f4f4;
-    p + p {
-      margin-top: 0.5rem;
-    }
-  }
+.mt2rem {
+  margin-top: 2rem;
+  display: block;
+}
 
-  .simplebar-vertical {
-    top: 0.5rem;
+#output {
+  background-color: #f4f4f4;
+  p + p {
+    margin-top: 0.5rem;
   }
+}
+
+.simplebar-vertical {
+  top: 0.5rem;
 }

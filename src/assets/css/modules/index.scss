@@ -1,8 +1,4 @@
-body {
-  overflow: hidden;
-}
-
-#indexScreen {
+.indexScreen {
   height: 100vh;
   width: 100vw;
   background: radial-gradient(
@@ -14,45 +10,44 @@ body {
   background-size: cover;
 }
 
-#content {
+.indexNav {
+  position: relative;
+  z-index: 2;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.4), #f4f4f4);
+
+  &__linksWrap {
+    max-width: 1200px;
+    padding: 0.5rem 0;
+    margin: auto;
+    text-align: right;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: #333;
+    margin-left: 10px;
+  }
+
+  &__link--whiteText {
+    color: #f4f4f4;
+  }
+}
+
+.hero {
   position: absolute;
   top: 50%;
   left: 10vw;
   transform: translateY(-50%);
   height: 40vh;
 
-  h1 {
+  &__title {
     font-family: "Proza Libre", var(--headingFont);
     font-size: 3.5rem;
     color: #f4f4f4;
-    margin-bottom: 5vh;
   }
 
-  p {
+  &__subtitle {
     color: #eee;
-    margin-bottom: 3vh;
-  }
-}
-
-#indexNav {
-  position: relative;
-  z-index: 2;
-  background-image: linear-gradient(
-    rgba(255, 255, 255, 0.4),
-    #f4f4f4
-  ) !important;
-
-  div {
-    max-width: 1200px;
-    padding: 0.5rem 0;
-    margin: auto;
-    text-align: right;
-
-    a,
-    .fbBtn {
-      text-decoration: none;
-      color: #333;
-      margin-left: 10px;
-    }
+    margin-bottom: 4vh;
   }
 }
