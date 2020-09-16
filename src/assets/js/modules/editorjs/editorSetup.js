@@ -104,7 +104,7 @@ export default class EditorSetup {
     const submitBtn = document.getElementById("submitBtn");
     if (submitBtn) {
       submitBtn.addEventListener("click", () => {
-        const output = document.getElementById("output");
+        const output = document.querySelector(".editorContent__output");
         if (output.innerHTML) {
           new SubmitNote();
           return;

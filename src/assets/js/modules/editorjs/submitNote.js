@@ -13,7 +13,7 @@ export default class SubmitNote {
       element: this.submitBtn,
       cssClasses: ["preloader", "preloader--accent"],
     });
-    this.output = document.getElementById("output");
+    this.output = document.querySelector(".editorContent__output");
     this.events();
   }
 

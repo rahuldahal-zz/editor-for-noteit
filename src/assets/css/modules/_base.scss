@@ -22,7 +22,7 @@ button:active {
   background-color: var(--accentColor);
 }
 
-#fade {
+.fade {
   visibility: hidden;
   position: absolute;
   top: 0;
@@ -37,7 +37,7 @@ button:active {
   visibility: visible !important;
 }
 
-#flashMessageContainer {
+.flashMessage {
   position: absolute;
   z-index: 5;
   top: 0;
@@ -45,7 +45,7 @@ button:active {
   width: 100vw;
   pointer-events: none;
 
-  #flashMessage {
+  &__message {
     pointer-events: initial;
     position: relative;
     padding: 1.25em 1.5em;
@@ -55,40 +55,40 @@ button:active {
     font-family: "roboto", var(--bodyFont);
     border-radius: 0.5rem;
   }
+}
 
-  .flashMessage--active {
-    min-width: 200px;
-    box-shadow: -3px -8px 12px -6px rgba(0, 0, 0, 0.3);
-    &::before {
-      content: "I have a message that";
-      position: absolute;
-      top: -25%;
-      left: 0;
-      padding: 0.25em 0.5em;
-      background-color: #333;
-      color: #f4f4f4;
-      font-size: 0.9rem;
-      border-radius: 0.5rem 0.5rem 0 0;
-    }
-  }
-
-  .flashMessage--error {
-    background-color: #e31f1f;
+.flashMessage--active {
+  min-width: 200px;
+  box-shadow: -3px -8px 12px -6px rgba(0, 0, 0, 0.3);
+  &::before {
+    content: "I have a message that";
+    position: absolute;
+    top: -25%;
+    left: 0;
+    padding: 0.25em 0.5em;
+    background-color: #333;
     color: #f4f4f4;
-    animation: error 0.5s ease-in-out forwards;
+    font-size: 0.9rem;
+    border-radius: 0.5rem 0.5rem 0 0;
   }
+}
 
-  .flashMessage--warning {
-    background-color: #e3cd18;
-    color: #333;
-    animation: warning 0.5s ease-in-out forwards;
-  }
+.flashMessage--error {
+  background-color: #e31f1f;
+  color: #f4f4f4;
+  animation: error 0.5s ease-in-out forwards;
+}
 
-  .flashMessage--success {
-    background-color: #0c991c;
-    color: #f4f4f4;
-    animation: success 0.5s ease-in-out;
-  }
+.flashMessage--warning {
+  background-color: #e3cd18;
+  color: #333;
+  animation: warning 0.5s ease-in-out forwards;
+}
+
+.flashMessage--success {
+  background-color: #0c991c;
+  color: #f4f4f4;
+  animation: success 0.5s ease-in-out;
 }
 
 @keyframes error {
