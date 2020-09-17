@@ -141,6 +141,7 @@ export default class SeeOutput {
 				${data.items
           .map((listItem) => {
             dtText = listItem.match(dtRegex)[0];
+            dtText = dtText.replace(/helloStyle/, "descriptionTitle");
             ddText = listItem
               .substring(listItem.match(/<\/dt>/).index + 5)
               .trim();

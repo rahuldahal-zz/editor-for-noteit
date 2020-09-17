@@ -1,4 +1,4 @@
-export default class Miscellaneous {
+export default class ScrollSynchronization {
   constructor() {
     this.editorContainer = document.querySelector(
       ".editorContent__editorjsWrap"
@@ -44,6 +44,13 @@ export default class Miscellaneous {
   }
 
   triggerScrollOn(on, target) {
+    // if user has not clicked on "see-output", return immediately
+    if (!document.querySelector(".editorContent__output").innerHTML) {
+      return;
+    }
+
+    // else, do
+
     const blockID = this.getBlockID(target);
 
     // remove "scrolledBlock" class from previous scrolled block
@@ -66,8 +73,16 @@ export default class Miscellaneous {
   }
 
   getBlockID(target) {
+    console.log(target);
     let blockID = target.dataset.blockId;
     if (blockID) return blockID;
+
+    if (
+      target.tagName === "DT" &&
+      target.classList.contains("descriptionTitle")
+    )
+      return this.getBlockID(target.nextElementSibling); // find "blockID" on DL
+
     return this.getBlockID(target.parentElement);
   }
 }

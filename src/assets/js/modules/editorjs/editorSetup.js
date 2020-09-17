@@ -12,8 +12,8 @@ import MarginTop from "./plugins/marginTop";
 import GenerateOutput from "./generateOutput";
 import SubmitNote from "./submitNote";
 import FlashMessage from "../flashMessage";
-import Miscellaneous from "./misc";
-let misc; // is initialized as soon as the editor is loaded
+import ScrollSynchronization from "../editorOutputScrollSynchronization";
+let scrollSync; // is initialized as soon as the editor is loaded
 
 export default class EditorSetup {
   constructor() {
@@ -86,8 +86,8 @@ export default class EditorSetup {
       if (progress) {
         editor.render(progress).then(() => {
           editor.focus();
-          misc = new Miscellaneous();
-          misc.giveIDToEditableItems();
+          scrollSync = new ScrollSynchronization();
+          scrollSync.giveIDToEditableItems();
         });
       }
     });
