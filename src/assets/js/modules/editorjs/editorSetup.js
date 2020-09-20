@@ -9,11 +9,9 @@ import DescriptionTitle from "./plugins/descriptionTitle_inlineTool";
 import WordMeaning from "./plugins/wordMeaning_inlineTool";
 import MarginLeft from "./plugins/marginLeft";
 import MarginTop from "./plugins/marginTop";
-import GenerateOutput from "./generateOutput";
 import SubmitNote from "./submitNote";
 import FlashMessage from "../flashMessage";
-import ScrollSynchronization from "../editorOutputScrollSynchronization";
-let scrollSync; // is initialized as soon as the editor is loaded
+import EditorOutputSync from "../editorOutputSynchronization";
 
 export default class EditorSetup {
   constructor() {
@@ -84,20 +82,21 @@ export default class EditorSetup {
     editor.isReady.then(() => {
       let progress = JSON.parse(localStorage.getItem("progress"));
       if (progress) {
-        editor.render(progress).then(() => {
-          editor.focus();
-          scrollSync = new ScrollSynchronization();
-          scrollSync.giveIDToEditableItems();
-        });
+        editor
+          .render(progress)
+          .then(() => {
+            editor.focus();
+            // editor and output synchronization
+            new EditorOutputSync(editor);
+          })
+          .catch((error) =>
+            console.log("error while retrieving 'progress' from storage.")
+          );
+      } else {
+        // editor and output synchronization
+        new EditorOutputSync(editor);
       }
     });
-
-    // rendering the content
-
-    const seeOutputBtn = document.getElementById("seeOutputBtn");
-    const outputElement = document.querySelector(".editorContent__output");
-
-    new GenerateOutput(editor, seeOutputBtn, outputElement); // save is also handled in that module
 
     // submit feature
 

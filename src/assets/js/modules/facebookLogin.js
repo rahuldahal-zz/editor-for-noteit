@@ -4,11 +4,11 @@ import FlashMessage from "./flashMessage";
 const flash = new FlashMessage();
 
 const fullscreenLoader = new PreLoader({
-  element: "#fullscreenLoader",
+  element: ".fullscreenLoader",
   cssClasses: ["preloader", "visible"],
 });
 const fade = new PreLoader({
-  element: "#fade",
+  element: ".fade",
   cssClasses: ["visible"],
 });
 

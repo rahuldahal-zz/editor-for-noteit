@@ -1,44 +1,18 @@
-import Storage from "../storage";
+import { giveIdTo } from "../editorOutputSynchronization";
 
-export default class SeeOutput {
-  constructor(editor, seeOutputBtn, output) {
+export default class GenerateHTML {
+  constructor(output, blocks) {
     this.output = output; // the "output" container
-    this.editor = editor;
-    this.seeOutputBtn = seeOutputBtn;
-    this.events();
+    this.initHTMLGeneration(blocks);
+    this.last_paragraph_ID = 0;
+    this.last_list_ID = 0;
+    this.last_header_ID = 0;
+    this.last_table_ID = 0;
+    this.containerFromTop = this.output.getBoundingClientRect().top;
+    this.initGiveIDs();
   }
 
-  events() {
-    this.seeOutputBtn.addEventListener("click", () => {
-      this.saveToLocalStorage();
-    });
-    this.hasPressedCtrl = false;
-    const editorjs = document.getElementById("editorjs");
-    editorjs.addEventListener("keyup", (e) => {
-      if (e.keyCode == 17) this.hasPressedCtrl = false;
-    });
-    editorjs.addEventListener("keydown", (e) => {
-      if (e.keyCode == 17) this.hasPressedCtrl = true;
-      if (this.hasPressedCtrl && e.keyCode == 83) {
-        e.preventDefault();
-        this.saveToLocalStorage();
-      }
-    });
-  }
-
-  saveToLocalStorage() {
-    this.editor
-      .save()
-      .then((data) => {
-        console.log(data.blocks);
-        new Storage("localStorage", { identifier: "progress", data: data }); // save to LocalStorage
-        this.init(data.blocks);
-        giveIDs(this.output);
-      })
-      .catch((error) => console.error(error));
-  }
-
-  init(blocks) {
+  initHTMLGeneration(blocks) {
     this.output.innerHTML = ""; // making sure to clean the previous value
 
     const subArrayFunc = createSubArray(blocks); // the "closure" function, if I could say so...
@@ -198,6 +172,28 @@ export default class SeeOutput {
     });
     return newData;
   }
+
+  initGiveIDs() {
+    const blocks = [
+      {
+        name: "paragraph",
+        selector: ".output-paragraph:not([data-block-id])",
+      },
+      {
+        name: "list",
+        selector: ".output-list-item:not([data-block-id])",
+      },
+      {
+        name: "header",
+        selector: ".output-header:not([data-block-id])",
+      },
+      {
+        name: "table",
+        selector: ".output-table:not([data-block-id])",
+      },
+    ];
+    blocks.forEach((block) => giveIdTo.call(this, block));
+  }
 }
 
 // Actually, this is my first "practical" test of "closure", LOL
@@ -218,20 +214,4 @@ function createSubArray(blocks) {
     // return {subArray: subArray, startFrom: startFrom};
     return subArray;
   };
-}
-
-// Give IDs to blocks
-
-function giveIDs(output) {
-  const paragraphs = document.querySelectorAll(".output-paragraph");
-  const listItems = document.querySelectorAll(".output-list-item");
-  const headers = document.querySelectorAll(".output-header");
-  const tables = document.querySelectorAll(".output-table");
-  const editableItems = [...paragraphs, ...listItems, ...headers, ...tables];
-  const containerFromTop = output.getBoundingClientRect().top;
-  editableItems.forEach((item, index) => {
-    let toScrollForView = item.getBoundingClientRect().top - containerFromTop;
-    item.setAttribute("data-block-id", `block${index}`);
-    item.setAttribute("data-scroll-for-view", toScrollForView);
-  });
 }

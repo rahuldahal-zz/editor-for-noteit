@@ -2,10 +2,26 @@
   display: flex;
   width: 100vw;
   background-color: #333;
-  padding: 0.5rem;
+  padding: 0.5rem 2.5vw;
+  align-items: center;
+  justify-content: space-between;
+
+  &__btns {
+    display: flex;
+    align-items: center;
+  }
 
   &__btn {
     margin-right: 20px;
+  }
+
+  &__copyrightInfo {
+    color: #eee;
+    font-family: "roboto", var(--bodyFont);
+  }
+
+  &__copyrightOwner {
+    color: #f4f4f4;
   }
 }
 
@@ -132,4 +148,8 @@ svg {
 
 .simplebar-vertical {
   top: 0.5rem;
+}
+
+.simplebar-content-wrapper {
+  scroll-behavior: smooth;
 }
