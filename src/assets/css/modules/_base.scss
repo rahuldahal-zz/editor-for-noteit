@@ -193,3 +193,43 @@ button:active {
 }
 
 // notes
+
+.difficultWord {
+  text-decoration: underline !important;
+  cursor: pointer;
+  position: relative;
+}
+
+.difficultWord::after {
+  content: attr(data-meaning);
+  z-index: 2;
+  display: block;
+  visibility: hidden;
+  width: max-content;
+  height: max-content;
+  display: block;
+  position: absolute;
+  left: 50%;
+  bottom: -2rem;
+  transform: scaleY(0) translateX(-50%);
+  transform-origin: top;
+  background: #333;
+  border-radius: 5px;
+  color: #fff;
+  padding: 5px;
+}
+.difficultWord:hover::after {
+  visibility: visible;
+  animation: appearFromTop 0.2s ease-in-out forwards;
+}
+
+@keyframes appearFromTop {
+  100% {
+    -webkit-transform: scaleY(1) translateX(-50%);
+    transform: scaleY(1) translateX(-50%);
+  }
+}
+
+.difficult_words:hover .meaning {
+  display: block;
+}
